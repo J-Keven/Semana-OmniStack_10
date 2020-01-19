@@ -9,10 +9,6 @@ module.exports = {
         // buscar programers por techs
 
         const {latitude, longitude, techs} = request.query;
-        
-        // latitude = Number(latitude);
-        // latitude = Number(longitude);
-        console.log(request.query);
         const techsArrey = TrasnfStringArray(techs);
         const devs = await Dev.find({
             techs:{

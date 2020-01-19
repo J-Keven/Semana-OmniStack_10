@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const http = require('http');
 
 const routes = require('./routes');
-
+const {WebSocket} = require('./WebSocket');
 
 mongoose.connect("mongodb+srv://keven:jhonas4313@cluster0-vvpyt.mongodb.net/test?retryWrites=true&w=majority",{
     useNewUrlParser: true,
@@ -11,12 +12,14 @@ mongoose.connect("mongodb+srv://keven:jhonas4313@cluster0-vvpyt.mongodb.net/test
 });
 
 const app = express();
+const server = http.Server(app); 
+WebSocket(server);
 
 app.use(cors({}));
 app.use(express.json());// O express.json é obrigatorio vir antes das rotas... se nao, n ira reconhecer.
 app.use(routes);
 
-app.listen(3333);
+server.listen(3333);
 
 
 
